@@ -1,5 +1,7 @@
 # @deepwhale-cn/dsh-cn-mlps
 
+[![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/feely0208/dsh-cn-mlps)
+
 **等保对照** —— 按 GB/T 22239-2019，把代码和配置里**可静态发现**的等保项找出来。
 
 ## 先说清楚它是什么、不是什么
