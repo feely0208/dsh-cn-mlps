@@ -1,0 +1,14 @@
+{
+  "id": "MLPS-ERROR-LEAK",
+  "title": "错误信息把内部细节返回给客户端",
+  "severity": "medium",
+  "source": "GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应「对可能引起信息泄露的错误信息进行处理」",
+  "advice": "把 error.stack / error.message 直接返回给客户端，会把文件路径、依赖版本、SQL 结构泄露给攻击者。对外只返回错误码，细节记服务端日志。",
+  "check": {
+    "type": "file-pattern",
+    "pattern": "(res|response|reply|ctx)\\.(send|json|write|end)\\s*\\([^)]{0,60}(err|error)\\.(stack|message)",
+    "flags": "g",
+    "exts": [".js", ".mjs", ".cjs", ".ts", ".tsx"],
+    "max": 20
+  }
+}

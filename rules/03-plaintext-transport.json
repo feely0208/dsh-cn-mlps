@@ -1,0 +1,14 @@
+{
+  "id": "MLPS-PLAINTEXT",
+  "title": "明文传输（http:// 端点）",
+  "severity": "medium",
+  "source": "GB/T 22239-2019 第三级 · 安全通信网络 · 通信传输 —— 应采用校验技术或密码技术保证通信过程中数据的完整性/保密性",
+  "advice": "生产代码里出现 http:// 意味着凭证与业务数据可能明文过网。改成 https://。localhost / 127.0.0.1 的 http 是本地回环，不算问题（本规则已排除）。",
+  "check": {
+    "type": "file-pattern",
+    "pattern": "[\"']http://(?!localhost|127\\.0\\.0\\.1|0\\.0\\.0\\.0|\\[::1\\])[a-zA-Z0-9.-]+",
+    "flags": "g",
+    "exts": [".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx", ".py", ".go", ".java", ".yml", ".yaml", ".json", ".env", ".ini", ".conf"],
+    "max": 30
+  }
+}

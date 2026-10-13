@@ -1,0 +1,14 @@
+{
+  "id": "MLPS-DEBUG",
+  "title": "调试开关处于开启状态",
+  "severity": "medium",
+  "source": "GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应关闭不必要的服务、端口与功能",
+  "advice": "生产配置里的 DEBUG=true / NODE_ENV=development 常常意味着：详细错误回显、调试端点开放、关闭了部分安全校验。上线前请确认这是有意为之。",
+  "check": {
+    "type": "file-pattern",
+    "pattern": "(DEBUG|debug|NODE_ENV|FLASK_ENV|APP_ENV)\\s*[:=]\\s*[\"']?(true|development|dev|on)[\"']?",
+    "flags": "g",
+    "exts": [".env", ".yml", ".yaml", ".json", ".ini", ".conf", ".properties"],
+    "max": 20
+  }
+}

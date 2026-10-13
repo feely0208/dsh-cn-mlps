@@ -1,0 +1,91 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>深鲸守护 · 等保对照 · 检查报告</title>
+<style>
+  :root{--bg:#0b1018;--fg:#e6edf6;--muted:#8b9bb4;--line:#1e2a3a;--card:#121a26}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;padding:32px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .card .k{color:var(--muted);font-size:12px;margin-bottom:6px}
+  .card .v{font-size:20px;font-weight:700}
+  .chip{display:inline-block;padding:3px 10px;border-radius:999px;margin:0 6px 6px 0;font-size:13px;
+        border:1px solid var(--c);color:var(--c)}
+  .chip b{font-size:15px}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13px}
+  th{color:var(--muted);font-weight:500;background:#0e1622}
+  tr:last-child td{border-bottom:0}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:6px}
+  .t{font-weight:600;margin-bottom:2px}
+  .src{color:var(--muted);font-size:12px}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#7dd3fc}
+  .ev{color:var(--muted);font-size:12px;margin-top:2px;word-break:break-all}
+  .adv{color:var(--muted);font-size:12px;max-width:260px}
+  .ok{background:#0d2b1a;border:1px solid #1d7a4a;color:#4ade80;padding:16px;border-radius:12px;margin-bottom:20px}
+  .warn{background:#2b1f0d;border:1px solid #a16207;color:#fbbf24;padding:12px 16px;border-radius:12px;margin-bottom:20px;font-size:13px}
+  footer{color:var(--muted);font-size:12px;margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
+  footer p{margin:3px 0}
+</style></head><body><div class="wrap">
+  <h1>深鲸守护 · 等保对照</h1>
+  <div class="sub">按 GB/T 22239-2019 逐项对照代码与配置里可静态发现的等保项</div>
+
+  <div class="cards">
+    <div class="card"><div class="k">扫描文件</div><div class="v">3</div></div>
+    <div class="card"><div class="k">检查规则</div><div class="v">5<span style="font-size:13px;color:var(--muted)">/5</span></div></div>
+    <div class="card"><div class="k">命中</div><div class="v" style="color:#ea580c">6</div></div>
+    <div class="card"><div class="k">已跳过目录</div><div class="v">0</div></div>
+  </div>
+
+  
+  <div class="warn">⚠️ 扫描到的文件很少，请确认扫描目录是否正确 —— <b>不要因「全绿」就放心</b>。</div>
+  
+
+  <div style="margin-bottom:16px"><span class="chip" style="--c:#ea580c">高 <b>2</b></span><span class="chip" style="--c:#ca8a04">中 <b>4</b></span></div>
+       <table><thead><tr><th>级别</th><th>问题</th><th>位置 / 证据</th><th>建议</th></tr></thead>
+       <tbody>
+      <tr class="sev-high">
+        <td><span class="dot" style="--c:#ea580c"></span>高</td>
+        <td><div class="t">配置或代码里出现默认口令</div><div class="src">GB/T 22239-2019 第三级 · 安全计算环境 · 身份鉴别 / 访问控制 —— 应「及时删除或停用多余的、过期的账户」「限制默认账户的访问权限」</div></td>
+        <td><code>config.js:2</code><div class="ev">password: 'admin'</div></td>
+        <td class="adv">等保测评对默认口令是一票否决项，而且这也是真实入侵最常见的入口。请改为首次启动强制设置、或从环境变量注入，并在文档里写清初始化步骤。</td>
+      </tr>
+      <tr class="sev-high">
+        <td><span class="dot" style="--c:#ea580c"></span>高</td>
+        <td><div class="t">用 MD5/SHA1 处理口令</div><div class="src">GB/T 22239-2019 第三级 · 安全计算环境 · 数据保密性 —— 鉴别信息应加密存储</div></td>
+        <td><code>config.js:4</code><div class="ev">md5(password</div></td>
+        <td class="adv">MD5/SHA1 已被证明可高效碰撞，且不加盐时可直接查彩虹表。存储口令请用 bcrypt / scrypt / Argon2（自带盐与工作因子）。注意：MD5 用于非安全的校验（如文件指纹）不算问题，需看上下文。</td>
+      </tr>
+      <tr class="sev-medium">
+        <td><span class="dot" style="--c:#ca8a04"></span>中</td>
+        <td><div class="t">明文传输（http:// 端点）</div><div class="src">GB/T 22239-2019 第三级 · 安全通信网络 · 通信传输 —— 应采用校验技术或密码技术保证通信过程中数据的完整性/保密性</div></td>
+        <td><code>config.js:3</code><div class="ev">'http://api.example.com</div></td>
+        <td class="adv">生产代码里出现 http:// 意味着凭证与业务数据可能明文过网。改成 https://。localhost / 127.0.0.1 的 http 是本地回环，不算问题（本规则已排除）。</td>
+      </tr>
+      <tr class="sev-medium">
+        <td><span class="dot" style="--c:#ca8a04"></span>中</td>
+        <td><div class="t">调试开关处于开启状态</div><div class="src">GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应关闭不必要的服务、端口与功能</div></td>
+        <td><code>.env:1</code><div class="ev">DEBUG=true</div></td>
+        <td class="adv">生产配置里的 DEBUG=true / NODE_ENV=development 常常意味着：详细错误回显、调试端点开放、关闭了部分安全校验。上线前请确认这是有意为之。</td>
+      </tr>
+      <tr class="sev-medium">
+        <td><span class="dot" style="--c:#ca8a04"></span>中</td>
+        <td><div class="t">调试开关处于开启状态</div><div class="src">GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应关闭不必要的服务、端口与功能</div></td>
+        <td><code>.env:2</code><div class="ev">NODE_ENV=development</div></td>
+        <td class="adv">生产配置里的 DEBUG=true / NODE_ENV=development 常常意味着：详细错误回显、调试端点开放、关闭了部分安全校验。上线前请确认这是有意为之。</td>
+      </tr>
+      <tr class="sev-medium">
+        <td><span class="dot" style="--c:#ca8a04"></span>中</td>
+        <td><div class="t">错误信息把内部细节返回给客户端</div><div class="src">GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应「对可能引起信息泄露的错误信息进行处理」</div></td>
+        <td><code>server.js:2</code><div class="ev">res.json({ error: err.stack</div></td>
+        <td class="adv">把 error.stack / error.message 直接返回给客户端，会把文件路径、依赖版本、SQL 结构泄露给攻击者。对外只返回错误码，细节记服务端日志。</td>
+      </tr></tbody></table>
+
+  <footer>
+    <p>扫描范围：<code>tests/fixtures/fail/demo-project</code> · 3 个文件</p>
+    <p>规则库：— · 生成时间：2026-10-13 02:24:51</p>
+    <p></p>
+  </footer>
+</div></body></html>

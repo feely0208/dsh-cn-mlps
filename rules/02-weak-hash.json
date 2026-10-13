@@ -1,0 +1,13 @@
+{
+  "id": "MLPS-WEAK-HASH",
+  "title": "用 MD5/SHA1 处理口令",
+  "severity": "high",
+  "source": "GB/T 22239-2019 第三级 · 安全计算环境 · 数据保密性 —— 鉴别信息应加密存储",
+  "advice": "MD5/SHA1 已被证明可高效碰撞，且不加盐时可直接查彩虹表。存储口令请用 bcrypt / scrypt / Argon2（自带盐与工作因子）。注意：MD5 用于非安全的校验（如文件指纹）不算问题，需看上下文。",
+  "check": {
+    "type": "file-pattern",
+    "pattern": "(md5|sha1)\\s*\\(\\s*[^)]{0,40}(password|passwd|pwd|pass)",
+    "flags": "gi",
+    "max": 20
+  }
+}
