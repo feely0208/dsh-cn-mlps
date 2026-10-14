@@ -3,7 +3,7 @@
 [![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/feely0208/dsh-cn-mlps)
 
 
-**关键词**：等保 · 等级保护 · 等保测评 · 网络安全等级保护 · GB/T 22239 · 静态合规检查 · 等级保护基本要求
+**关键词**：等保 · 等级保护 · 等保测评 · 网络安全等级保护 · 等级保护基本要求 · GB/T 22239 · 静态合规检查
 **Keywords**: MLPS · classified protection · GB/T 22239 · China compliance · level protection
 **等保对照** —— 按 GB/T 22239-2019，把代码和配置里**可静态发现**的等保项找出来。
 
