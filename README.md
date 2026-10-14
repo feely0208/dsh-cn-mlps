@@ -52,7 +52,7 @@ dsh-cn-mlps --list-rules    # 列出规则和依据
 dsh-cn-mlps --html r.html   # HTML 报告
 ```
 
-![报告示例](docs/report.png)
+![dsh-cn-mlps 的检查报告示例](https://raw.githubusercontent.com/feely0208/dsh-cn-mlps/main/docs/report.png)
 
 ## 边界
 
