@@ -1,0 +1,51 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0d0f13; display:flex; justify-content:center;
+         align-items:flex-start; padding:22px; font-family:-apple-system,"PingFang SC",
+         "Helvetica Neue",sans-serif; }
+  .win { width:1180px; border-radius:11px; overflow:hidden;
+          box-shadow:0 14px 44px rgba(0,0,0,.55); }
+  .bar { background:#2a2d34; padding:11px 15px; display:flex; align-items:center; gap:9px; }
+  .dot { width:12px; height:12px; border-radius:50%; }
+  .t { margin-left:11px; color:#7a8290; font-size:13px; letter-spacing:.02em; }
+  .term { background:#1b1d22; padding:20px 22px 24px; font-family:"SF Mono",Menlo,Consolas,
+           "PingFang SC",monospace; font-size:13.5px; line-height:1.72; }
+  .cmd { color:#5ee08a; margin-bottom:13px; font-size:13.5px; }
+  .cmd b { color:#fff; font-weight:600; }
+  .l { white-space:pre-wrap; word-break:break-word; }
+</style></head><body>
+  <div class="win">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="t">dsh-cn-mlps · rules</span>
+    </div>
+    <div class="term">
+      <div class="cmd">$ <b>dsh-cn-mlps --list-rules</b></div>
+      <div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  深鲸守护 · 等保对照 —— 5 条规则</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [high] MLPS-DEFAULT-CRED</span></div>
+<div class="l"><span style="color:#d8dee9">        配置或代码里出现默认口令</span></div>
+<div class="l"><span style="color:#7a8290">        依据：GB/T 22239-2019 第三级 · 安全计算环境 · 身份鉴别 / 访问控制 —— 应「及时删除或停用多余的、过期的账户」「限制默认账户的访问权限」</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [high] MLPS-WEAK-HASH</span></div>
+<div class="l"><span style="color:#d8dee9">        用 MD5/SHA1 处理口令</span></div>
+<div class="l"><span style="color:#7a8290">        依据：GB/T 22239-2019 第三级 · 安全计算环境 · 数据保密性 —— 鉴别信息应加密存储</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [medium] MLPS-PLAINTEXT</span></div>
+<div class="l"><span style="color:#d8dee9">        明文传输（http:// 端点）</span></div>
+<div class="l"><span style="color:#7a8290">        依据：GB/T 22239-2019 第三级 · 安全通信网络 · 通信传输 —— 应采用校验技术或密码技术保证通信过程中数据的完整性/保密性</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [medium] MLPS-DEBUG</span></div>
+<div class="l"><span style="color:#d8dee9">        调试开关处于开启状态</span></div>
+<div class="l"><span style="color:#7a8290">        依据：GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应关闭不必要的服务、端口与功能</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  [medium] MLPS-ERROR-LEAK</span></div>
+<div class="l"><span style="color:#d8dee9">        错误信息把内部细节返回给客户端</span></div>
+<div class="l"><span style="color:#7a8290">        依据：GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应「对可能引起信息泄露的错误信息进行处理」</span></div>
+    </div>
+  </div>
+</body></html>

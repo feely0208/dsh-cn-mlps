@@ -1,0 +1,75 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0d0f13; display:flex; justify-content:center;
+         align-items:flex-start; padding:22px; font-family:-apple-system,"PingFang SC",
+         "Helvetica Neue",sans-serif; }
+  .win { width:1180px; border-radius:11px; overflow:hidden;
+          box-shadow:0 14px 44px rgba(0,0,0,.55); }
+  .bar { background:#2a2d34; padding:11px 15px; display:flex; align-items:center; gap:9px; }
+  .dot { width:12px; height:12px; border-radius:50%; }
+  .t { margin-left:11px; color:#7a8290; font-size:13px; letter-spacing:.02em; }
+  .term { background:#1b1d22; padding:20px 22px 24px; font-family:"SF Mono",Menlo,Consolas,
+           "PingFang SC",monospace; font-size:13.5px; line-height:1.72; }
+  .cmd { color:#5ee08a; margin-bottom:13px; font-size:13.5px; }
+  .cmd b { color:#fff; font-weight:600; }
+  .l { white-space:pre-wrap; word-break:break-word; }
+</style></head><body>
+  <div class="win">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="t">dsh-cn-mlps · demo</span>
+    </div>
+    <div class="term">
+      <div class="cmd">$ <b>dsh-cn-mlps --demo</b></div>
+      <div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  【演示模式】使用内置样本，不是你的真实项目。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  深鲸守护 · 等保对照 v0.1.0</span></div>
+<div class="l"><span style="color:#d8dee9">  ──────────────────────────────────────────────────────────────────</span></div>
+<div class="l"><span style="color:#d8dee9">  扫描范围   内置演示样本 · 故意有问题的项目</span></div>
+<div class="l"><span style="color:#d8dee9">             3 个文件 · 0 个目录已跳过</span></div>
+<div class="l"><span style="color:#d8dee9">  检查规则   5/5 条</span></div>
+<div class="l"><span style="color:#ffd166">  命中       6 条</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#ff6b6b">  【高】2 条</span></div>
+<div class="l"><span style="color:#7a8290">    · 配置或代码里出现默认口令</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  config.js:2</span></div>
+<div class="l"><span style="color:#7a8290">      证据  password: &#x27;admin&#x27;</span></div>
+<div class="l"><span style="color:#7a8290">      依据  GB/T 22239-2019 第三级 · 安全计算环境 · 身份鉴别 / 访问控制 —— 应「及时删除或停用多余的、过期的账户」「限制默认账户的访问权限」</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  等保测评对默认口令是一票否决项，而且这也是真实入侵最常见的入口。请改为首次启动强制设置、或从环境变量注入，并在文档里写清初始化步骤。</span></div>
+<div class="l"><span style="color:#7a8290">    · 用 MD5/SHA1 处理口令</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  config.js:4</span></div>
+<div class="l"><span style="color:#7a8290">      证据  md5(password</span></div>
+<div class="l"><span style="color:#7a8290">      依据  GB/T 22239-2019 第三级 · 安全计算环境 · 数据保密性 —— 鉴别信息应加密存储</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  MD5/SHA1 已被证明可高效碰撞，且不加盐时可直接查彩虹表。存储口令请用 bcrypt / scrypt / Argon2（自带盐与工作因子）。注意：MD5 用于非安全的校验（如文件指纹）不算问题，需看上下文。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#ffd166">  【中】4 条</span></div>
+<div class="l"><span style="color:#7a8290">    · 明文传输（http:// 端点）</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  config.js:3</span></div>
+<div class="l"><span style="color:#7a8290">      证据  &#x27;http://api.example.com</span></div>
+<div class="l"><span style="color:#7a8290">      依据  GB/T 22239-2019 第三级 · 安全通信网络 · 通信传输 —— 应采用校验技术或密码技术保证通信过程中数据的完整性/保密性</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  生产代码里出现 http:// 意味着凭证与业务数据可能明文过网。改成 https://。localhost / 127.0.0.1 的 http 是本地回环，不算问题（本规则已排除）。</span></div>
+<div class="l"><span style="color:#7a8290">    · 调试开关处于开启状态</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  .env:1</span></div>
+<div class="l"><span style="color:#7a8290">      证据  DEBUG=true</span></div>
+<div class="l"><span style="color:#7a8290">      依据  GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应关闭不必要的服务、端口与功能</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  生产配置里的 DEBUG=true / NODE_ENV=development 常常意味着：详细错误回显、调试端点开放、关闭了部分安全校验。上线前请确认这是有意为之。</span></div>
+<div class="l"><span style="color:#7a8290">    · 调试开关处于开启状态</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  .env:2</span></div>
+<div class="l"><span style="color:#7a8290">      证据  NODE_ENV=development</span></div>
+<div class="l"><span style="color:#7a8290">      依据  GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应关闭不必要的服务、端口与功能</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  生产配置里的 DEBUG=true / NODE_ENV=development 常常意味着：详细错误回显、调试端点开放、关闭了部分安全校验。上线前请确认这是有意为之。</span></div>
+<div class="l"><span style="color:#7a8290">    · 错误信息把内部细节返回给客户端</span></div>
+<div class="l"><span style="color:#d8dee9">      位置  server.js:2</span></div>
+<div class="l"><span style="color:#7a8290">      证据  res.json({ error: err.stack</span></div>
+<div class="l"><span style="color:#7a8290">      依据  GB/T 22239-2019 第三级 · 安全计算环境 · 入侵防范 —— 应「对可能引起信息泄露的错误信息进行处理」</span></div>
+<div class="l"><span style="color:#d8dee9">      建议  把 error.stack / error.message 直接返回给客户端，会把文件路径、依赖版本、SQL 结构泄露给攻击者。对外只返回错误码，细节记服务端日志。</span></div>
+<div class="l"><span style="color:#7a8290">&nbsp;</span></div>
+<div class="l"><span style="color:#d8dee9">  ──────────────────────────────────────────────────────────────────</span></div>
+    </div>
+  </div>
+</body></html>
