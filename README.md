@@ -1,5 +1,7 @@
 # @deepwhale-cn/dsh-cn-mlps
 
+[![dshfind 收录](https://dshfind.com/api/badge/feely0208/dsh-cn-mlps?lang=zh)](https://dshfind.com/zh/plugins/feely0208/dsh-cn-mlps)
+
 [![Listed on dsh-plugin.org](https://dsh-plugin.org/badges/listed.svg)](https://dsh-plugin.org/plugins/feely0208/dsh-cn-mlps)
 
 
